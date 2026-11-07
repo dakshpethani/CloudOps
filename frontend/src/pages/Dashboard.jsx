@@ -1,5 +1,5 @@
-
-    import { useEffect, useState } from "react";
+import { apiUrl } from "../services/apiConfig";
+import { useEffect, useState } from "react";
 
     import {
         getAllServers,
@@ -180,8 +180,7 @@ function GaugeCard({ title, value }) {
                     }
 
                     // Fetch active alerts
-                    const response = await fetch("/api/monitoring/alerts");
-
+                    const response = await fetch(apiUrl("/api/monitoring/alerts"));
                     if (!response.ok) {
                         throw new Error("Unable to fetch alerts");
                     }

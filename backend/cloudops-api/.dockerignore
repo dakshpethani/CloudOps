@@ -1,0 +1,16 @@
+
+# Private Spring configuration
+src/main/resources/application.properties
+src/main/resources/application-local.properties
+src/main/resources/application-secret.properties
+
+# Local build and IDE files
+target/
+.idea/
+*.iml
+
+# Secrets and environment files
+.env
+.env.*
+*.pem
+*.key

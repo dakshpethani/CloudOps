@@ -16,6 +16,7 @@
 **/dependency-reduced-pom.xml
 *.class
 *.log
+*.jar
 
 # React / Node
 **/node_modules/

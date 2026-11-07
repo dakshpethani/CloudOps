@@ -6,6 +6,8 @@ import {
   getServerMetrics,
 } from "../services/serverService";
 
+import { apiUrl } from "../services/apiConfig";
+
 import MonitoringCharts from "../components/MonitoringCharts";
 
 function Monitoring() {
@@ -25,7 +27,7 @@ function Monitoring() {
     const loadMetrics = async () => {
       try {
         const response = await fetch(
-          "http://localhost:8081/api/monitoring/agent-metrics"
+          apiUrl("/api/monitoring/agent-metrics")
         );
 
         if (!response.ok) {
@@ -92,14 +94,14 @@ function Monitoring() {
 
   const handleShowHistory = () => {
     const server = onlineServers.find(
-        (item) => String(item.id) === String(selectedServerId)
+      (item) => String(item.id) === String(selectedServerId)
     );
 
     if (!server) return;
 
     setHistoryMessage("");
     setAppliedServerId(server.id);
-};
+  };
 
   const formatUptime = (seconds) => {
     if (seconds == null) return "N/A";
@@ -169,8 +171,6 @@ function Monitoring() {
                   <strong>{formatUptime(metrics.uptimeSeconds)}</strong>
                 </div>
               </article>
-
-              
             </div>
 
             <br />
@@ -233,16 +233,17 @@ function Monitoring() {
         {historyMessage && (
           <p className="page-description">{historyMessage}</p>
         )}
-{appliedServerId && (
-    <MonitoringCharts
-        serverId={appliedServerId}
-        serverType={
-            onlineServers.find(
+
+        {appliedServerId && (
+          <MonitoringCharts
+            serverId={appliedServerId}
+            serverType={
+              onlineServers.find(
                 (server) => String(server.id) === String(appliedServerId)
-            )?.serverType
-        }
-    />
-)}
+              )?.serverType
+            }
+          />
+        )}
       </section>
     </>
   );

@@ -1,5 +1,7 @@
 
-const API_BASE_URL = "/api/servers";
+import { apiUrl } from "./apiConfig";
+
+const API_BASE_URL = apiUrl("/api/servers");
 
 // Fetch all registered servers from MySQL
 export async function getAllServers() {
@@ -31,7 +33,7 @@ export async function addServer(server) {
 
 // Delete a registered server
 export async function deleteServer(id) {
-    const response = await fetch(`${API_BASE_URL}/${id}`, {
+    const response = await fetch(apiUrl(`/api/servers/${id}`), {
         method: "DELETE"
     });
 
@@ -44,7 +46,9 @@ export async function deleteServer(id) {
 
 // Existing Windows monitoring endpoint
 export async function getMonitoringMetrics() {
-    const response = await fetch("/api/monitoring/metrics");
+    const response = await fetch(
+        apiUrl("/api/monitoring/metrics")
+    );
 
     if (!response.ok) {
         throw new Error("Failed to fetch Windows metrics");
@@ -56,7 +60,7 @@ export async function getMonitoringMetrics() {
 // Fetch metrics for an individual registered server
 export async function getServerMetrics(id) {
     const response = await fetch(
-        `/api/monitoring/servers/${id}/metrics`
+        apiUrl(`/api/monitoring/servers/${id}/metrics`)
     );
 
     if (!response.ok) {
@@ -65,9 +69,11 @@ export async function getServerMetrics(id) {
 
     return response.json();
 }
+
+// Update server alert email
 export async function updateServerAlertEmail(id, alertEmail) {
     const response = await fetch(
-        `${API_BASE_URL}/${id}/alert-email`,
+        apiUrl(`/api/servers/${id}/alert-email`),
         {
             method: "PUT",
             headers: {
@@ -83,10 +89,11 @@ export async function updateServerAlertEmail(id, alertEmail) {
 
     return response.json();
 }
-// Fetch historical CPU usage for a specific server
+
+// Fetch historical CPU usage
 export async function getServerCpuHistory(id) {
     const response = await fetch(
-        `/api/monitoring/servers/${id}/history/cpu`
+        apiUrl(`/api/monitoring/servers/${id}/history/cpu`)
     );
 
     if (!response.ok) {
@@ -96,10 +103,10 @@ export async function getServerCpuHistory(id) {
     return response.json();
 }
 
-// Fetch historical memory usage for a specific server
+// Fetch historical memory usage
 export async function getServerMemoryHistory(id) {
     const response = await fetch(
-        `/api/monitoring/servers/${id}/history/memory`
+        apiUrl(`/api/monitoring/servers/${id}/history/memory`)
     );
 
     if (!response.ok) {
@@ -109,10 +116,10 @@ export async function getServerMemoryHistory(id) {
     return response.json();
 }
 
-// Fetch historical disk usage for a specific server
+// Fetch historical disk usage
 export async function getServerDiskHistory(id) {
     const response = await fetch(
-        `/api/monitoring/servers/${id}/history/disk`
+        apiUrl(`/api/monitoring/servers/${id}/history/disk`)
     );
 
     if (!response.ok) {

@@ -1,10 +1,12 @@
-const API_BASE_URL ="/api";
+
+import { apiUrl } from "./apiConfig";
+
 export async function checkBackendHealth() {
-    const response = await fetch(`${API_BASE_URL}/health`);
-    if(!response.ok)
-    {
+    const response = await fetch(apiUrl("/api/health"));
+
+    if (!response.ok) {
         throw new Error(`backend error : ${response.status}`);
     }
+
     return response.text();
-    
 }

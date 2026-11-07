@@ -1,5 +1,6 @@
 
 import { useEffect, useState } from "react";
+import { apiUrl } from "../services/apiConfig";
 
 function Alerts() {
   const [alerts, setAlerts] = useState([]);
@@ -12,7 +13,9 @@ function Alerts() {
 
     async function fetchAlerts() {
       try {
-        const response = await fetch("/api/monitoring/alerts");
+        const response = await fetch(
+          apiUrl("/api/monitoring/alerts")
+        );
 
         if (!response.ok) {
           throw new Error("Unable to fetch alert history");
