@@ -11,6 +11,8 @@ RUN chmod +x mvnw
 
 COPY src src
 
+RUN cp src/main/resources/application-example.properties src/main/resources/application.properties
+
 RUN ./mvnw clean package -DskipTests
 
 FROM eclipse-temurin:17-jre
