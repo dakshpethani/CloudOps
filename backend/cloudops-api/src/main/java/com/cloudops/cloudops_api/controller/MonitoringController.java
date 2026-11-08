@@ -14,7 +14,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api/monitoring")
-@CrossOrigin(origins = "${CORS_ALLOWED_ORIGINS:http://localhost:5173}")
+
 public class MonitoringController {
 
     private final PrometheusService prometheusService;

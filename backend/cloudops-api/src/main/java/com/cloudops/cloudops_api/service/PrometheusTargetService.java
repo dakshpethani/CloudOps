@@ -22,8 +22,7 @@ public class PrometheusTargetService {
     private final ObjectMapper objectMapper;
 
     private final Path targetFile =
-            Path.of("C:/Prometheus/file_sd/targets.json");
-
+            Path.of("C:/Prometheus/file_sd/cloudops-targets.json");
     public PrometheusTargetService(
             ServerRepository repository
             ) {
@@ -55,8 +54,8 @@ public class PrometheusTargetService {
             Files.move(
                     tempFile,
                     targetFile,
-                    StandardCopyOption.REPLACE_EXISTING,
-                    StandardCopyOption.ATOMIC_MOVE
+                    StandardCopyOption.REPLACE_EXISTING
+
             );
 
         } catch (IOException e) {
